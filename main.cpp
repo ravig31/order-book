@@ -71,6 +71,8 @@ public:
     void fill(Quantity quantity){
         if (quantity > get_remaining_quantity())
             throw std::logic_error(std::format("Order ({}) cannot be filled, quantity exceeds remaining", get_order_id()));
+        
+        remaining_quantity_ -= quantity;
     }
     
 };

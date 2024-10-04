@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/Users/ravi.gamage/personal/order-book/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/ravi.gamage/personal/order-book/build -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -o CMakeFiles/OrderBook.dir/main.cpp.o -c /Users/ravi.gamage/personal/order-book/main.cpp",
+  "file": "/Users/ravi.gamage/personal/order-book/main.cpp",
+  "output": "CMakeFiles/OrderBook.dir/main.cpp.o"
+}
+]

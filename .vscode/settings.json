@@ -1,5 +1,9 @@
 {
-    "C_Cpp.default.compilerPath": "/usr/local/bin/gcc-<version>",
-    "C_Cpp.default.intelliSenseMode": "gcc-x64",
-    "C_Cpp.default.cppStandard": "c++17" // or the standard you are using
-}
+    "C_Cpp.default.compilerPath": "/usr/bin/clang++",
+    "C_Cpp.default.cppStandard": "c++20",
+    "C_Cpp.default.intelliSenseMode": "macos-clang-arm64",
+    "C_Cpp.default.includePath": [
+      "${workspaceFolder}/**",
+      "/opt/homebrew/opt/llvm@20/include"
+    ]
+  }
