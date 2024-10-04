@@ -1,0 +1,5 @@
+{
+    "C_Cpp.default.compilerPath": "/usr/local/bin/gcc-<version>",
+    "C_Cpp.default.intelliSenseMode": "gcc-x64",
+    "C_Cpp.default.cppStandard": "c++17" // or the standard you are using
+}

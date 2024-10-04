@@ -4,6 +4,7 @@
 #include <list>
 #include <cmath>
 #include <format>
+#include <stdexcept>
 
 enum class OrderType{
     GoodTillCancel,
@@ -21,50 +22,50 @@ using Quantity = std::uint32_t;
 using OrderId = std::uint64_t;
 
 struct LevelInfo{
-    Price _price;
-    Quantity _quantity;
+    Price price_;
+    Quantity quantity_;
 };
 
 using LevelInfos = std::vector<LevelInfo>;
 
 class OrderBookLevelInfos {
 private:
-    LevelInfo bids;  // Using 'm_' prefix to distinguish member variables
-    LevelInfo asks;
+    LevelInfo bids_;  // Using 'm_' prefix to distinguish member variables
+    LevelInfo asks_;
 
 public:
-    OrderBookLevelInfos(const LevelInfo& _bids, const LevelInfo& _asks)
-        : bids{_bids}, asks{_asks} {}  // Using member initializer list
+    OrderBookLevelInfos(const LevelInfo& bids, const LevelInfo& asks)
+        : bids_{bids}, asks_{asks} {}  // Using member initializer list
 
-    const LevelInfo& getBids() const { return bids; }
-    const LevelInfo& getAsks() const { return asks; }
+    const LevelInfo& getBids() const { return bids_; }
+    const LevelInfo& getAsks() const { return asks_; }
 };
 
 class Order {
 private:
-    OrderType order_type;
-    OrderId order_id;
-    Side side;
-    Price price;
-    Quantity initial_quantity;
-    Quantity remaining_quantity;
+    OrderType order_type_;
+    OrderId order_id_;
+    Side side_;
+    Price price_;
+    Quantity initial_quantity_;
+    Quantity remaining_quantity_;
 
 public:
-    Order(OrderType _order_type, OrderId _order_id, Side _side, Price _price, Quantity _quantity)
-        : order_type{_order_type},
-        order_id{_order_id},
-        side{_side},
-        price{_price},
-        initial_quantity{_quantity},
-        remaining_quantity{_quantity}
+    Order(OrderType order_type, OrderId order_id, Side side, Price price, Quantity quantity)
+        : order_type_{order_type},
+        order_id_{order_id},
+        side_{side},
+        price_{price},
+        initial_quantity_{quantity},
+        remaining_quantity_{quantity}
     {}
 
-    OrderId get_order_id() const { return order_id; }
-    Side get_side() const { return side; }
-    Price get_price() const { return price; }
-    OrderType get_order_type() const { return order_type; }
-    Quantity get_intitial_quantity() const { return initial_quantity; }
-    Quantity get_remaining_quantity() const { return remaining_quantity; }
+    OrderId get_order_id() const { return order_id_; }
+    Side get_side() const { return side_; }
+    Price get_price() const { return price_; }
+    OrderType get_order_type() const { return order_type_; }
+    Quantity get_intitial_quantity() const { return initial_quantity_; }
+    Quantity get_remaining_quantity() const { return remaining_quantity_; }
     Quantity get_filled_quantity() const { return get_intitial_quantity() - get_remaining_quantity(); }
 
     void fill(Quantity quantity){
