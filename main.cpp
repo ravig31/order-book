@@ -1,10 +1,10 @@
 #include <iostream>
-#include <map>
-#include <set>
-#include <list>
-#include <cmath>
+// #include <map>
+// #include <set>
+// #include <list>
+// #include <cmath>
+// #include <stdexcept>
 #include <format>
-#include <stdexcept>
 
 enum class OrderType{
     GoodTillCancel,
@@ -70,10 +70,12 @@ public:
 
     void fill(Quantity quantity){
         if (quantity > get_remaining_quantity())
-            throw std::logic_error(std::format("Order ({}) cannot be filled, quantity exceeds remaining", get_order_id()));
-        
+            throw std::logic_error("Order (" + std::to_string(get_order_id()) + ") cannot be filled, quantity exceeds remaining");
+        std::string error_message = std::format("Order ({}) cannot be filled, quantity exceeds remaining", get_order_id());
+        throw std::logic_error(error_message);
         remaining_quantity_ -= quantity;
     }
+    
     
 };
 

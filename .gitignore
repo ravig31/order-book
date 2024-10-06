@@ -1,12 +1,6 @@
 # VSCode specific files
 .vscode/*
 
-# Allow sharing of specific VSCode settings if needed
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
 # VSCode history plugin
 .history
 
@@ -43,6 +37,7 @@
 *.la
 *.a
 *.lib
+*.cache
 
 # Executables
 *.exe
