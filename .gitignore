@@ -38,6 +38,7 @@
 *.a
 *.lib
 *.cache
+*.dSYM
 
 # Executables
 *.exe
