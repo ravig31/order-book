@@ -4,9 +4,11 @@
       "/opt/homebrew/opt/llvm/bin/clang++",
       "-c",
       "-std=c++20",
+      "-I/Users/ravi.gamage/personal/order-book/include",
       "-I/opt/homebrew/Cellar/fmt/11.0.2/include",
       "-L/opt/homebrew/Cellar/fmt/11.0.2/lib",
       "-lfmt",
+      "-pedantic-errors",
       "-o",
       "main",
       "main.cpp"
