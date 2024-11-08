@@ -50,6 +50,8 @@ public:
                 std::format("Order ({}) cannot be converted to GoodTillCancel, only market orders",
                             get_order_id()));
         }
+		price_ = price;
+		order_type_ = OrderType::GoodTillCancel;
     }
 };
 

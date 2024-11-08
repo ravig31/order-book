@@ -48,8 +48,8 @@ private:
                 break;
 
             while (bids.size(), asks.size()) {
-                auto& bid = bids.front();
-                auto& ask = asks.front();
+                auto bid = bids.front();
+                auto ask = asks.front();
 
                 // fills the lowest available volume of the both
                 Quantity quantity =
@@ -65,7 +65,7 @@ private:
 
                 if (ask->is_filled()) {
                     asks.pop_front();
-                    orders_.erase(bid->get_order_id());
+                    orders_.erase(ask->get_order_id());
                 }
 
                 if (bids.empty())
@@ -92,7 +92,9 @@ private:
             if (order->get_order_type() == OrderType::FillAndKill)
                 cancel_order(order->get_order_id());
         }
-
+        for (Trade trade : trades){
+            trade.display();
+        }
         return trades;
     }
 
