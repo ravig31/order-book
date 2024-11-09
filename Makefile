@@ -1,6 +1,5 @@
 complile_main:
-	clang++ -std=c++20 -g -I/opt/homebrew/Cellar/fmt/11.0.2/include -I/Users/ravi.gamage/personal/order-book/include \
- 	src/main.cpp -o src/main
+	clang++ -std=c++20 -g src/main.cpp -o src/main
 run_ob:
 	make complile_main
 	src/main

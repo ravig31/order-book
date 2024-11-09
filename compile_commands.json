@@ -4,17 +4,14 @@
       "/opt/homebrew/opt/llvm/bin/clang++",
       "-c",
       "-std=c++20",
-      "-I/Users/ravi.gamage/personal/order-book/include",
-      "-I/opt/homebrew/Cellar/fmt/11.0.2/include",
-      "-L/opt/homebrew/Cellar/fmt/11.0.2/lib",
-      "-lfmt",
-      "-pedantic-errors",
+      "-I/opt/homebrew/opt/fmt/include",
+      "-L/opt/homebrew/opt/llvm/lib",
       "-o",
       "main",
       "main.cpp"
     ],
-    "directory": "/Users/ravi.gamage/personal/order-book",
-    "file": "/Users/ravi.gamage/personal/order-book/main.cpp",
-    "output": "/Users/ravi.gamage/personal/order-book/main"
+    "directory": "/Users/ravindugamage/main/order-book",
+    "file": "/Users/ravindugamage/main/order-book/src/main.cpp",
+    "output": "/Users/ravindugamage/main/order-book/src/main"
   }
 ]
