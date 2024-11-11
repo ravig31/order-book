@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Order.h"
 
 class OrderModify {

@@ -1,3 +1,4 @@
+#pragma once
 #include "Aliases.h"
 
 struct LevelInfo {

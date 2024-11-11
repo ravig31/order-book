@@ -1,3 +1,5 @@
+#pragma once
+
 #include <fmt/base.h>
 #include <format>
 #include <list>

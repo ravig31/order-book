@@ -1,4 +1,6 @@
 
+#pragma once
+
 #include <iomanip>
 #include <iostream>
 #include <vector>
