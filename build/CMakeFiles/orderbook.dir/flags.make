@@ -4,7 +4,7 @@
 # compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++
 CXX_DEFINES = -DFMT_SHARED
 
-CXX_INCLUDES = -I/Users/ravindugamage/main/order-book/src -isystem /opt/homebrew/include
+CXX_INCLUDES = -I/Users/ravindugamage/main/order-book/include -isystem /opt/homebrew/include
 
 CXX_FLAGSarm64 = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -mmacosx-version-min=14.5
 

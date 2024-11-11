@@ -20,7 +20,7 @@ add_executable(orderbook
 
 # Include directories
 target_include_directories(orderbook PRIVATE
-    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/include
     ${fmt_INCLUDE_DIRS}
 )
 
