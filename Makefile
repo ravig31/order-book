@@ -1,3 +1,4 @@
+
 complile_main:
 	clang++ -std=c++20 -g src/main.cpp -o src/main
 run_ob:
