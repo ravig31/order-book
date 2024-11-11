@@ -10,7 +10,6 @@
 
 # Visual Studio specific files (in case you use it alongside VSCode)
 .vs/
-.clang-format
 compile_commands.json
 
 # Prerequisites
