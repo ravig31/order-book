@@ -1,7 +1,92 @@
-#include <map>
+#include <chrono>
+#include <condition_variable>
+#include <ctime>
+#include <mutex>
 #include <numeric>
 
+#include "Aliases.h"
+#include "Order.h"
 #include "OrderBook.h"
+#include "OrderType.h"
+
+void OrderBook::remove_expired_good_for_day_orders() {
+    using namespace std::chrono;
+    const auto end_of_trading_day{hours(16)};
+
+    while (true) {
+        const auto now = system_clock::now();
+        const auto time_now = system_clock::to_time_t(now);
+        std::tm tm_now;
+        localtime_r(&time_now, &tm_now);
+
+        if (tm_now.tm_hour >= end_of_trading_day.count()) {
+            tm_now.tm_mday += 1;
+        }
+
+        tm_now.tm_hour = end_of_trading_day.count();
+        tm_now.tm_min = 0;
+        tm_now.tm_sec = 0;
+
+        auto next = system_clock::from_time_t(mktime(&tm_now));
+        auto till = next - now + milliseconds(100);
+
+        {
+            std::unique_lock orders_lock{orders_mutex_};
+
+            if (shutdown.wait_for(orders_lock, till) == std::cv_status::no_timeout)
+                return;
+        }
+
+        OrderIds orders_to_cancel;
+
+        {
+            std::scoped_lock order_lock{orders_mutex_};
+
+            for (const auto& [_, order_entry] : orders_) {
+                const auto& [order, _] = order_entry;
+
+                if (order->get_order_type() == OrderType::GoodTillCancel)
+                    orders_to_cancel.push_back((order->get_order_id()));
+            }
+        }
+
+        cancel_orders(orders_to_cancel);
+    }
+}
+
+void OrderBook::cancel_orders(OrderIds order_ids) {
+    std::scoped_lock orders_lock{orders_mutex_};
+
+    for (const auto& id : order_ids) {
+        cancel_order_internal(id);
+    }
+}
+
+void OrderBook::cancel_order_internal(OrderId order_id) {
+    if (!orders_.contains(order_id))
+        return;
+
+    const auto& [order, order_it] = orders_.at(order_id);
+    orders_.erase(order_id);
+
+    if (order->get_side() == Side::Sell) {
+        auto price = order->get_price();
+        auto& orders = asks_.at(price);
+        orders.erase(order_it);
+        if (orders.empty())
+            asks_.erase(price);
+    } else {
+        auto price = order->get_price();
+        auto& orders = bids_.at(price);
+        orders.erase(order_it);
+        if (orders.empty())
+            bids_.erase(price);
+    }
+
+    on_order_cancelled(order);
+}
+
+void OrderBook::on_order_cancelled(OrderPointer order) {};
 
 bool OrderBook::can_match(Side side, Price price) const {
     if (side == Side::Buy) {
@@ -124,25 +209,8 @@ Trades OrderBook::add_order(OrderPointer order) {
 }
 
 void OrderBook::cancel_order(OrderId order_id) {
-    if (!orders_.contains(order_id))
-        return;
-
-    const auto& [order, order_it] = orders_.at(order_id);
-
-    if (order->get_side() == Side::Sell) {
-        auto price = order->get_price();
-        auto& orders = asks_.at(price);
-        orders.erase(order_it);
-        if (orders.empty())
-            asks_.erase(price);
-    } else {
-        auto price = order->get_price();
-        auto& orders = bids_.at(price);
-        orders.erase(order_it);
-        if (orders.empty())
-            bids_.erase(price);
-    }
-    orders_.erase(order_id);
+    std::scoped_lock orders_lock{orders_mutex_};
+    cancel_order_internal(order_id);
 }
 
 Trades OrderBook::match_order(OrderModify order) {
