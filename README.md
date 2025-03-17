@@ -30,6 +30,6 @@
 
 # Todo
 
-- [] Implement removing good for day orders 
-- [] Unit tests
-- [] Load testing
+[] Implement removing good for day orders 
+[] Unit tests
+[] Load testing
