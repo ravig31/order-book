@@ -6,4 +6,4 @@ enum class OrderType {
   FillOrKill,
   Market,
   GoodForDay
-};
+}; 
