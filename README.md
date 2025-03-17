@@ -16,20 +16,20 @@
   - Accepts partial fills
   - Cancels unfilled portion
 
+4. **Good Till Cancelled (GTC)**
+  - Remains active until manually cancelled
+  - Can apply to market or limit orders
+  - Some brokers auto-cancel after 30-90 days
+
 ## Orders Requiring Only Quantity
 1. **Market Orders**
   - Specify only quantity
   - Executes at current market price
   - Highest execution priority
 
-2. **Good Till Cancelled (GTC)**
-  - Remains active until manually cancelled
-  - Can apply to market or limit orders
-  - Some brokers auto-cancel after 30-90 days
-
-
 # Todo
 
-[] Implement removing good for day orders 
-[] Unit tests
-[] Load testing
+- [ ] Implement removing good for day orders 
+- [ ] Thread safety
+- [ ] Unit tests
+- [ ] Performance benchmarking
