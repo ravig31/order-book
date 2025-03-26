@@ -2,6 +2,9 @@
 #include <iostream>
 
 #include "LevelInfo.h"
+#include <vector>  
+#include <iostream>
+
 
 using LevelInfos = std::vector<LevelInfo>;
 class OrderBookLevelInfos {

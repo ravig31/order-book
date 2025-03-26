@@ -2,6 +2,7 @@
 
 #include <format>
 #include <list>
+#include <memory>
 #include <stdexcept>
 
 #include "Aliases.h"
