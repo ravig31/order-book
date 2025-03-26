@@ -231,10 +231,10 @@ Trades OrderBook::match_orders()
 		if (order->get_order_type() == OrderType::FillAndKill)
 			cancel_order(order->get_order_id());
 	}
-	for (Trade trade : trades)
-	{
-		trade.display();
-	}
+	// for (Trade trade : trades)
+	// {
+	// 	trade.display();
+	// }
 	return trades;
 }
 
